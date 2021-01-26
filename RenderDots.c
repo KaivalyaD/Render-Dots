@@ -62,8 +62,7 @@ void drawLine(char sheet[][x_lim], int m, int C) {
 }
 
 main() {
-	// This is an example main() function, which will generate a blank screen
-	// See the Readme.txt below, to tinker with the code :)
+	// This is an example main() function that generates a blank screen. See below, to tinker with the code :)
 	
 	char sheet_name[y_lim][x_lim];
 	
