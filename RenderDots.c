@@ -55,7 +55,7 @@ void drawLine(char sheet[][x_lim], int m, int C) {
 	
 	for(i=0; i<y_lim; i++) {
 		for(j=0; j<x_lim; j++) {
-			if((i - cy) == m * (cx - j) + C)
+			if((cy - i) == m * (j - cx) + C)
 				fill;
 		}
 	}
