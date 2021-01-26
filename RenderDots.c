@@ -1,35 +1,77 @@
 #include <stdio.h>
 
-#define x 168
-#define y 44
-#define set dotmat[i][j] = '*'
-#define clr dotmat[i][j] = ' '
+#define x_lim 167
+#define y_lim 44
+#define cx x_lim/2
+#define cy y_lim/2
+#define fill sheet[i][j] = '.'
+#define clr sheet[i][j] = ' '
 
-void Render() {
-	char dotmat[y][x];
-	int i, j, k=0;
+void clean(char sheet[][x_lim]) {
+	int i, j;
 	
-	int centre_x = x/2, centre_y = y/2;
-	int radius = 5;
-	
-	for(i=0; i<y; i++) {
-		for(j=0; j<x; j++) {
-			if((j == centre_x && i != centre_y) || (j != centre_x && i == centre_y))
-				clr;
-			else if((i-centre_y)*(i-centre_y) * (j-centre_x)*(j-centre_x) < 5000)
-				set;
-			else
-				clr;
+	for(i=0; i<y_lim; i++) {
+		for(j=0; j<x_lim; j++) {
+			clr;
 		}
 	}
+}
+
+void drawAxes(char sheet[][x_lim]) {
+	int i, j;
 	
-	for(i=0; i<y; i++){
-		for(j=0; j<x; j++)
-			printf("%c", dotmat[i][j]);
+	for(i=0; i<y_lim; i++) {
+		for(j=0; j<x_lim; j++) {
+			if((j != cx && i == cy) || (j == cx && i != cy) || (j == cx && i == cy))
+				fill;
+		}
+	}
+}
+
+void show(char sheet[][x_lim]) {
+	int i, j;
+	
+	for(i=0; i<y_lim; i++) {
+		for(j=0; j<x_lim; j++) {
+			printf("%c", sheet[i][j]);
+		}
 		printf("\n");
 	}
 }
 
+void shadeCircle(char sheet[][x_lim], int centre_x, int centre_y, int radius) {
+	int i, j;
+	
+	for(i=0; i<y_lim; i++) {
+		for(j=0; j<x_lim; j++) {
+			if((i-cy+centre_y)*(i-cy+centre_y) + (j-cx-centre_x)*(j-cx-centre_x) <= radius*radius)
+				fill;
+		}
+	}
+}
+
+void drawLine(char sheet[][x_lim], int m, int C) {
+	int i, j;
+	
+	for(i=0; i<y_lim; i++) {
+		for(j=0; j<x_lim; j++) {
+			if((i - cy) == m * (cx - j) + C)
+				fill;
+		}
+	}
+}
+
 main() {
-	Render();
+	// This is an example main() function, which will generate a blank screen
+	// See the Readme.txt below, to tinker with the code :)
+	
+	char sheet_name[y_lim][x_lim];
+	
+	clean(sheet_name);
+	
+	/*
+		All state-change commands go here
+	*/
+	
+	show(sheet_name);
 }
